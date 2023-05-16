@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %}Encode{% endblock %}
+{% block style %}
+
+{% endblock %}
+{% block nav %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/">Steganography</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="/encode">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/encode">Encode</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/decode">Decode</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container text-center col-6" style="margin-top: 10%;">
+        <h1>Encode Audio</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <br>
+            <div class="row">
+                <div class="col-6">
+                <label class="form-label" for="audio_file">Select an audio file:</label>
+                </div>
+                <div class="col-6">
+                    <div style="background-color: aliceblue; " id="dropArea" class="form-control" ondrop="handleDrop(event)" ondragover="event.preventDefault()">Drag and drop audio file here</div>
+                    <input type="file" class="form-control" name="audio_file" id="audio_file" style="display: none;">
+                </div>
+
+            </div>
+
+
+            <br>
+            <div class="row">
+                <div class="col-6">
+                    <label for="message">Enter a message to encode:</label>
+                </div>
+                <div class="col-6">
+                    <input class="form-control" name="message" id="message">
+                </div>
+            </div>
+            <br>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-light btn-lg">Encode</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function handleDrop(event) {
+            event.preventDefault();
+            var files = event.dataTransfer.files;
+            var audioFileInput = document.getElementById("audio_file");
+            audioFileInput.files = files;
+
+            // Display the file name
+            var dropArea = document.getElementById("dropArea");
+            dropArea.innerText = files[0].name;
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault();
+
+            // Add a visual indication that the area is a drop target
+            event.target.classList.add("drag-over");
+        }
+
+        function handleDragLeave(event) {
+            // Remove the visual indication when leaving the drop target
+            event.target.classList.remove("drag-over");
+        }
+
+        // Attach event listeners to the drop area
+        var dropArea = document.getElementById("dropArea");
+        dropArea.addEventListener("dragover", handleDragOver);
+        dropArea.addEventListener("dragleave", handleDragLeave);
+        dropArea.addEventListener("drop", handleDrop);
+    </script>
+
+{% endblock %}
