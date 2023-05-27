@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Decode</title>
+    <title>Video decode</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,900');
 
@@ -329,12 +329,12 @@
 <body style="background: #0f172a;">
     <div class="hero">
         <nav>
-            <h1 class="logo">Steganography</h1>
+            <h1 class="logo"><a href="/">Steganography</a></h1>
             <ul class="nav__links">
                 <li><a href="#">About</a></li>
                 <li><a href="/encode_image_remake">Image</a></li>
-                <li><a style="color: #f97316" href="">Audio</a></li>
-                <li><a href="/encode_video_remake">Video</a></li>
+                <li><a href="/decode_remake">Audio</a></li>
+                <li><a style="color: #f97316" href="">Video</a></li>
                 <li><a href="#">Text</a></li>
             </ul>
         </nav>
@@ -345,7 +345,7 @@
         <div class="container">
             <div class="left-bar">
                 <div class="encode">
-                    <a href="/encode_remake">
+                    <a href="/encode_video_remake">
                         <h1>Encode</h1>
                     </a>
                 </div>
@@ -356,7 +356,7 @@
                 </div>
             </div>
             <div class="main-side">
-                <h1 class="encode_main">Decode Audio Steganography</h1>
+                <h1 class="encode_main">Decode Video Steganography</h1>
                 <br>
                 {% if message %}
                     <div class="success">
@@ -375,12 +375,12 @@
                         </span>
                     </div>
                     <br>
-                    <h3>Attach a cover audio</h3>
+                    <h3>Attach a cover video</h3>
                     <br>
                     <div id="dropArea" class="form-control" onclick="openFilePicker()" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
                         <h3><span style="color: #69d4ff;">Choose</span> or drag and drop file here</h3>
                     </div>
-                    <input type="file" class="form-control" name="encoded_audio_file" id="encoded_audio_file" style="display: none;">
+                    <input type="file" class="form-control" name="encoded_video_file" id="encoded_video_file" style="display: none;" onchange="handleFileSelect(event)">
                     <br><br>
                     <div class="button_code">
                         <button type="submit">
@@ -394,14 +394,14 @@
     </div>
     <script>
         function openFilePicker() {
-            var fileInput = document.getElementById("encoded_audio_file");
+            var fileInput = document.getElementById("encoded_video_file");
             fileInput.click();
         }
 
         function handleDrop(event) {
             event.preventDefault();
             var files = event.dataTransfer.files;
-            var audioFileInput = document.getElementById("encoded_audio_file");
+            var audioFileInput = document.getElementById("encoded_video_file");
             audioFileInput.files = files;
 
             // Display the file name
@@ -427,6 +427,7 @@
             dropArea.innerText = file.name;
         }
     </script>
+
 
 
 </body>

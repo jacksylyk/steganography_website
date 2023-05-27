@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Decode</title>
+    <title>Image Decode</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,900');
 
@@ -109,7 +109,6 @@
         }
 
 
-
         .decode {
             border-left: solid #69d4ff;
             color: #69d4ff;
@@ -190,8 +189,8 @@
             transition: 0.4s;
         }
 
-        .effect-9~.focus-border:before,
-        .effect-9~.focus-border:after {
+        .effect-9 ~ .focus-border:before,
+        .effect-9 ~ .focus-border:after {
             content: "";
             position: absolute;
             top: 0;
@@ -203,7 +202,7 @@
             transition-delay: 0.2s;
         }
 
-        .effect-9~.focus-border:after {
+        .effect-9 ~ .focus-border:after {
             top: auto;
             bottom: 0;
             right: auto;
@@ -211,8 +210,8 @@
             transition-delay: 0.6s;
         }
 
-        .effect-9~.focus-border i:before,
-        .effect-9~.focus-border i:after {
+        .effect-9 ~ .focus-border i:before,
+        .effect-9 ~ .focus-border i:after {
             content: "";
             position: absolute;
             top: 0px;
@@ -225,7 +224,7 @@
             transition: 0.2s;
         }
 
-        .effect-9~.focus-border i:after {
+        .effect-9 ~ .focus-border i:after {
             left: auto;
             right: 0;
             top: auto;
@@ -233,24 +232,24 @@
             transition-delay: 0.4s;
         }
 
-        .effect-9:focus~.focus-border:before,
-        .effect-9:focus~.focus-border:after {
+        .effect-9:focus ~ .focus-border:before,
+        .effect-9:focus ~ .focus-border:after {
             width: 100%;
             transition: 0.2s;
             transition-delay: 0.6s;
         }
 
-        .effect-9:focus~.focus-border:after {
+        .effect-9:focus ~ .focus-border:after {
             transition-delay: 0.2s;
         }
 
-        .effect-9:focus~.focus-border i:before,
-        .effect-9:focus~.focus-border i:after {
+        .effect-9:focus ~ .focus-border i:before,
+        .effect-9:focus ~ .focus-border i:after {
             height: 100%;
             transition: 0.2s;
         }
 
-        .effect-9:focus~.focus-border i:after {
+        .effect-9:focus ~ .focus-border i:after {
             transition-delay: 0.4s;
         }
 
@@ -327,106 +326,114 @@
 </head>
 
 <body style="background: #0f172a;">
-    <div class="hero">
-        <nav>
-            <h1 class="logo">Steganography</h1>
-            <ul class="nav__links">
-                <li><a href="#">About</a></li>
-                <li><a href="/encode_image_remake">Image</a></li>
-                <li><a style="color: #f97316" href="">Audio</a></li>
-                <li><a href="/encode_video_remake">Video</a></li>
-                <li><a href="#">Text</a></li>
-            </ul>
-        </nav>
+<div class="hero">
+    <nav>
+        <h1 class="logo"><a href="/">Steganography</a></h1>
+        <ul class="nav__links">
+            <li><a href="#">About</a></li>
+            <li><a style="color: #f97316" href="#">Image</a></li>
+            <li><a href="/decode_remake">Audio</a></li>
+            <li><a href="/decode_video_remake">Video</a></li>
+            <li><a href="#">Text</a></li>
+        </ul>
+    </nav>
 
 
-    </div>
-    <div class="wrapper">
-        <div class="container">
-            <div class="left-bar">
-                <div class="encode">
-                    <a href="/encode_remake">
-                        <h1>Encode</h1>
-                    </a>
-                </div>
-                <div class="decode">
-                    <a href="#">
-                        <h1>Decode</h1>
-                    </a>
-                </div>
+</div>
+<div class="wrapper">
+    <div class="container">
+        <div class="left-bar">
+            <div class="encode">
+                <a href="/encode_image_remake">
+                    <h1>Encode</h1>
+                </a>
             </div>
-            <div class="main-side">
-                <h1 class="encode_main">Decode Audio Steganography</h1>
+            <div class="decode">
+                <a href="#">
+                    <h1>Decode</h1>
+                </a>
+            </div>
+        </div>
+        <div class="main-side">
+            <h1 class="encode_main">Decode Image Steganography</h1>
+            <br>
+            {% if message %}
+                <div class="success">
+                    <h4>The secret message: {{ message }}</h4>
+                </div>
+            {% endif %}
+            <form method="post" class="d-grid gap-2 col-6 mx-auto" enctype="multipart/form-data">
+                {% csrf_token %}
                 <br>
-                {% if message %}
-                    <div class="success">
-                        <h4>The secret message: {{ message }}</h4>
-                    </div>
-                {% endif %}
-                <form method="post" class="d-grid gap-2 col-6 mx-auto" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <br>
 
-                    <h3>Secret key</h3>
-                    <div class="col-3">
-                        <input class="effect-9" name="key" type="text" placeholder="Placeholder Text">
-                        <span class="focus-border">
+                <h3>Secret key</h3>
+                <div class="col-3">
+                    <input class="effect-9" name="key" type="text" placeholder="Placeholder Text">
+                    <span class="focus-border">
                             <i></i>
                         </span>
-                    </div>
-                    <br>
-                    <h3>Attach a cover audio</h3>
-                    <br>
-                    <div id="dropArea" class="form-control" onclick="openFilePicker()" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
-                        <h3><span style="color: #69d4ff;">Choose</span> or drag and drop file here</h3>
-                    </div>
-                    <input type="file" class="form-control" name="encoded_audio_file" id="encoded_audio_file" style="display: none;">
-                    <br><br>
-                    <div class="button_code">
-                        <button type="submit">
-                            <h4><span>Decode</span></h4>
-                        </button>
-                    </div>
-                </form>
-            </div>
-
+                </div>
+                <br>
+                <h3>Attach a cover image</h3>
+                <br>
+                <div id="dropArea" class="form-control" onclick="openFilePicker()" ondrop="handleDrop(event)"
+                     ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                    <h3><span style="color: #69d4ff;">Choose</span> or drag and drop file here</h3>
+                </div>
+                <input type="file" class="form-control" name="encoded_image_file" id="encoded_image_file"
+                       style="display: none;" onchange="handleFileSelect(event)">
+                <br><br>
+                <div class="button_code">
+                    <button type="submit">
+                        <h4><span>Decode</span></h4>
+                    </button>
+                </div>
+            </form>
         </div>
+
     </div>
-    <script>
-        function openFilePicker() {
-            var fileInput = document.getElementById("encoded_audio_file");
-            fileInput.click();
-        }
+</div>
+<script>
+    function openFilePicker() {
+        var fileInput = document.getElementById("encoded_image_file");
+        fileInput.click();
+    }
 
-        function handleDrop(event) {
-            event.preventDefault();
-            var files = event.dataTransfer.files;
-            var audioFileInput = document.getElementById("encoded_audio_file");
-            audioFileInput.files = files;
+    function handleDrop(event) {
+        event.preventDefault();
+        var files = event.dataTransfer.files;
+        var imageFileInput = document.getElementById("encoded_image_file");
+        imageFileInput.files = files;
 
-            // Display the file name
-            var dropArea = document.getElementById("dropArea");
-            dropArea.innerText = files[0].name;
-        }
+        // Display the file name
+        var dropArea = document.getElementById("dropArea");
+        dropArea.innerText = files[0].name;
+    }
 
-        function handleDragOver(event) {
-            event.preventDefault();
+    function handleDragOver(event) {
+        event.preventDefault();
 
-            // Add a visual indication that the area is a drop target
-            event.target.classList.add("drag-over");
-        }
+        // Add a visual indication that the area is a drop target
+        event.target.classList.add("drag-over");
+    }
 
-        function handleDragLeave(event) {
-            // Remove the visual indication when leaving the drop target
-            event.target.classList.remove("drag-over");
-        }
+    function handleDragLeave(event) {
+        // Remove the visual indication when leaving the drop target
+        event.target.classList.remove("drag-over");
+    }
 
-        function handleFileSelect(event) {
-            var file = event.target.files[0];
-            var dropArea = document.getElementById("dropArea");
-            dropArea.innerText = file.name;
-        }
-    </script>
+    function handleFileSelect(event) {
+        var file = event.target.files[0];
+        var dropArea = document.getElementById("dropArea");
+        dropArea.innerText = file.name;
+    }
+
+    // Attach event listeners to the drop area
+    var dropArea = document.getElementById("dropArea");
+    dropArea.addEventListener("dragover", handleDragOver);
+    dropArea.addEventListener("dragleave", handleDragLeave);
+    dropArea.addEventListener("drop", handleDrop);
+</script>
 
 
 </body>

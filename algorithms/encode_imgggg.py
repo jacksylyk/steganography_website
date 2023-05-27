@@ -1,10 +1,7 @@
-import os
 import random
-import zipfile
-
 from PIL import Image
 
-def encode_lsb_image(image_path, message):
+def encode_message(image_path, message):
     # Open the image file
     image = Image.open(image_path).convert("RGB")
 
@@ -16,8 +13,7 @@ def encode_lsb_image(image_path, message):
 
     # Generate a random key
     key = str(random.randint(10000, 99999))
-    with open("./algorithms/img/key_image.txt", 'w') as file:
-        file.write(str(key))
+    print("Key:" + key)
 
     # Normalize the original image
     pixels = image.load()
@@ -52,16 +48,9 @@ def encode_lsb_image(image_path, message):
                 break
 
     # Save the encoded image
-    encoded_img_path = "./algorithms/img/encoded_image.png"
-    image.save("./algorithms/img/encoded_image.png")
+    image.save("./algprithms/img/encoded_image.png")
 
-    with zipfile.ZipFile("./algorithms/img/encoded_image_result.zip", 'w') as zip_file:
-        # Add the video file to the zip archive
-        zip_file.write(encoded_img_path, os.path.basename(encoded_img_path))
-        # Add the text file to the zip archive
-        zip_file.write("./algorithms/img/key_image.txt", os.path.basename("./algorithms/img/key_image.txt"))
-
-def decode_lsb_image(image_path, key):
+def decode_message(image_path, key):
     # Open the encoded image file
     image = Image.open(image_path).convert("RGB")
 
@@ -97,5 +86,5 @@ def decode_lsb_image(image_path, key):
     return output
 
 if __name__ == '__main__':
-    encode_lsb_image("img/cover_image_small.jpg", "This is a secret message.")
-    print(decode_lsb_image("encoded_image.png", input("Key:")))
+    encode_message("img/cover_image_small.jpg", "This is a secret message.")
+    print(decode_message("encoded_image.png", input("Key:")))

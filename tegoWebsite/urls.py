@@ -26,6 +26,12 @@ urlpatterns = [
     path('decode/', views.decode_audio_view, name='decode'),
     path('encode_video/', views.encode_video_view, name='encode_video'),
     path('decode_video/', views.decode_video_view, name='decode_video'),
-    path('decode_remake/', views.encode_audio_remake_view, name='decode_remake'),
-
+    path('encode_image/', views.encode_image_view, name='encode_image'),
+    path('decode_image/', views.decode_image_view, name='decode_image'),
+    path('decode_remake/', views.decode_audio_remake_view, name='decode_remake'),
+    path('encode_remake/', views.encode_audio_remake_view, name='encode_remake'),
+    path('decode_video_remake/', views.decode_video_remake_view, name='decode_video_remake'),
+    path('encode_video_remake/', views.encode_video_remake_view, name='encode_video_remake'),
+    path('decode_image_remake/', views.decode_image_remake_view, name='decode_image_remake'),
+    path('encode_image_remake/', views.encode_image_remake_view, name='encode_image_remake'),
 ]

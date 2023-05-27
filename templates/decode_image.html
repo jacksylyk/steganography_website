@@ -29,7 +29,7 @@
 {% endblock %}
 {% block content %}
     <div class="container text-center col-6" style="margin-top: 10%;">
-      <h1 class="mb-3">Decode a Video</h1>
+      <h1 class="mb-3">Decode an image</h1>
       {% if message %}
         <p class="alert alert-dark">The decoded message is: {{ message }}</p>
       {% endif %}
@@ -37,11 +37,11 @@
           {% csrf_token %}
           <div class="text-center" >
               <div class="col-12">
-              <label for="encoded_image_file" class="form-label">Select an encoded video:</label>
+              <label for="encoded_image_file" class="form-label">Select an encoded image:</label>
               </div>
               <div class="" >
                   <div style="background-color: aliceblue; padding: 20px;" id="dropArea" class="form-control" onclick="openFilePicker()" ondrop="handleDrop(event)" ondragover="event.preventDefault()">Drag and drop image file here or click to select a file</div>
-                  <input type="file" class="form-control" name="encoded_video_file" id="encoded_video_file" required style="display: none;"onchange="handleFileSelect(event)">
+                  <input type="file" class="form-control" name="encoded_image_file" id="encoded_image_file" required style="display: none;"onchange="handleFileSelect(event)">
               </div>
               <br>
               <div class="col-12">
@@ -63,14 +63,14 @@
     </div>
     <script>
         function openFilePicker() {
-            var fileInput = document.getElementById("encoded_video_file");
+            var fileInput = document.getElementById("encoded_image_file");
             fileInput.click();
         }
 
         function handleDrop(event) {
             event.preventDefault();
             var files = event.dataTransfer.files;
-            var imageFileInput = document.getElementById("encoded_video_file");
+            var imageFileInput = document.getElementById("encoded_image_file");
             imageFileInput.files = files;
 
             // Display the file name
